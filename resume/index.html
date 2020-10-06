@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SJ Resume</title>
+    <meta name="description" content="">
+    <!--Make sure to choose your own typography! -->
+    <link href="https://fonts.googleapis.com/css?family=Bitter&display=swap" rel="stylesheet">
+
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+ 
+  <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+   </head>  
+
+   
+<header class="container">
+    <!-- Main navigation -->
+    <nav class="primary">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+    </nav>
+  </header>
+  <!-- Main -->
+  <main itemscope itemtype="http://schema.org/Person" class="container">
+    <h1>Shane Johnson</h1>
+    <section id="about">
+      <h2 class="visuallyhidden">Personal details</h2>
+      <img itemprop="image" src="assets/img/headshot.png" alt="Image of Shane Johnson">
+      <p itemprop="description">Shane Johnson, Bachelors of Science in E-Commerce studies, minor in IT, college graduate, has 4+ years in Customer Service and  Insurance Service & Sales experience</p>
+      <dl>
+        <dt>Name</dt>
+        <dd itemprop="name">
+          <span itemprop="givenName">Shane</span> <span itemprop="familyName">Johnson</span>
+        </dd>
+        <dt>Date of birth</dt>
+        <dd itemprop="birthDate"><time datetime="2000-09-06">09/06/2000</time></dd>
+        <dt>Nationality</dt>
+        <dd itemprop="nationality">Nationality</dd>
+        <dt>Location</dt>
+        <dd itemprop="homeLocation">Arkansas</dd>
+        <dt>Telephone</dt>
+        <dd>
+          <a itemprop="telephone" href="tel:501.725.0003">501.725.0003</a>
+        </dd>
+        <dt>Email</dt>
+        <dd>
+          <a itemprop="email" href="mailto:email@mail.com">SMJohnson7@ualr.edu</a>
+        </dd>
+        <dt>Address</dt>
+
+        <dd itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+          <span itemprop="streetAddress">2801 South University</span>
+          <span itemprop="addressLocality">Little Rock</span>
+          <span itemprop="postalCode">72204</span>
+          <span itemprop="addressCountry">USA</span>
+        </dd>
+
+      </dl>
+      <ul class="related-links">
+      <li><a itemprop="url" rel="me" href="https://github.com/profile"><i class="fab fa-github-square"></i> github</a></li>
+      <li><a itemprop="url" rel="me" href="http://linkedin.com/profile"><i class="fab fa-linkedin-in"></i> linkedin</a></li>
+      <li><a itemprop="url" href="resume.pdf" download><i class="far fa-file-pdf"></i> pdf resume</a></li>
+      </ul>
+    </section>
+    <section id="skills">
+      <h2 class="hr">Skills</h2>
+      <ul>
+        <li class="skill">Developed leads, scheduled appointments, identifed customer needs, and marketed appropriate products and services.</li>
+        <li class="skill">Provided prompt, accurate, and friendly customer service responding to inquiries regarding insurance availability, eligibility, coverages, policy changes, transfers, claim submissions, and billing clarification.</li>
+        <li class="skill">Work directly with the agent to establish and meet marketing goals.</li>
+        <li class="skill">Excellent communication skills - written, verbal and listening</li>
+        <li class="skill">Property and Casuality insurance licence</li>
+      </ul>
+    </section>
+    <section id="experience">
+      <h2>Experience</h2>
+      <!-- current job -->
+      <article class="job">
+        <h3 itemprop="jobTitle">Insurance Account Rep.</h3>
+        <div itemprop="worksFor" itemscope itemtype="http://schema.org/Organization">
+          <span itemprop="name">Matt McCarty State Farm</span>
+          <span>September 2017 - Present</span>
+          <p itemprop="description">Our mission is to help people manage the risks of everyday life, recover from the unexpected and realize their dreams.
+We help customers with their insurance and financial services needs, including Auto Insurance, Home Insurance, Life Insurance, Retirement Planning, Business Insurance, Health Insurance, and Renters Insurance.</p>
+          <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+          <a itemprop="url" href="http://501insurance.com">501insurance.com</a>
+          <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+          <span itemprop="addressLocality">Little Rock, Arkansas</span>
+          </span>
+          </span>
+        </div>
+      </article>
+      </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <article class="certificate" itemprop="alumniOf" itemscope itemtype="http://schema.org/EducationalOrganization">
+        <h3 itemprop="description"><abbr title="Master of Science">BA</abbr>Web Design and Development</h3>
+          <span itemprop="name">University name 1</span>
+          <span itemprop="location" itemscope>Anywhere, USA</span>
+          <span>2005-2007</span>
+      </article>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer class="container">
+    <div id="copyright">
+      &copy; company. All rights reserved.
+    </div>
+  </footer>
