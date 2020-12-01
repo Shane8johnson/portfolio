@@ -1,0 +1,771 @@
+<html>
+
+  <head>
+
+    <title>Cold Caller Form</title>
+
+    <meta charset = "UTF-8" />
+
+    <link rel="shortcut icon" type="image/jpg" href="https://image.flaticon.com/icons/svg/2345/2345053.svg"/>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+
+    
+
+    
+
+
+
+  <style>
+
+#submit{
+
+margin-top:10px;
+
+}
+
+#converted_url{
+
+display: none;
+
+}
+
+input[type=text]:focus {
+
+  background-color: lightblue;
+
+}
+
+input[type=text], select {
+
+  width: 100%;
+
+  padding: 12px 20px;
+
+  margin: 8px 0;
+
+  display: inline-block;
+
+  border: 1px solid #ccc;
+
+  border-radius: 4px;
+
+  box-sizing: border-box;
+
+}
+
+
+
+input[type=button] {
+
+  width: 100%;
+
+  background-color: #F01716;
+
+  color: white;
+
+  padding: 14px 20px;
+
+  margin: 8px 0;
+
+  border: none;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+
+}
+
+textarea {
+
+  width: 100%;
+
+  height: 150px;
+
+  padding: 12px 20px;
+
+  box-sizing: border-box;
+
+  border: 2px solid #ccc;
+
+  border-radius: 4px;
+
+  background-color: #f8f8f8;
+
+  resize: none;
+
+}
+
+
+
+input[type=button]:hover {
+
+  background-color: #ff7e75;
+
+}
+
+.div {
+
+  border-radius: 5px;
+
+  background-color: #f2f2f2;
+
+  padding: 20px;
+
+ border: solid black 2px;
+
+}
+
+
+
+.container{
+
+  width : 60% ;
+
+  margin : auto ;
+
+  margin-top:2%;
+
+  margin-bottom:10%;
+
+  
+
+  }
+
+
+
+  
+
+  header{
+
+  margin-top: 0px;
+
+  background-color: #F01716;
+
+  padding-top:1.5%;
+
+  padding-bottom:1%;
+
+  }
+
+  
+
+  #sflogo{
+
+  display:inline;
+
+  padding-left:2%;
+
+  float: left;
+
+  width:15%;
+
+  margin-top: auto;
+
+  margin-bottom:auto;
+
+
+
+  }
+
+  #agent{
+
+  font-size: 0.67vw;
+
+text-align: right;
+
+color: white;
+
+font-weight: bold;
+
+padding-right:2%;
+
+  }
+
+@media print {
+
+div {
+
+  border-radius: 0px;
+
+  background-color: white;
+
+  padding: 0px;
+
+margin:0px;
+
+border: solid white 0px;
+
+}
+
+.container{
+
+  width : 100% ;
+
+  margin-top:100px;
+
+  margin-bottom:0px;
+
+ 
+
+  }
+
+input,h3,label, {
+
+padding:0px !important;
+
+margin:0px !important;
+
+}
+
+#submit, footer, #intro, #closing, #template, #headerHR,#marriedMsg{
+
+display:none !important;
+
+}
+
+#custInfo{
+
+position:absolute;
+
+top:0px;
+
+padding: 12px 20px;
+
+width:100%;
+
+border: solid black 1px;
+
+}
+
+label{
+
+font-weight:bold;
+
+}
+
+#timeStap{
+
+display:block!important;
+
+}
+
+}
+
+</style>
+
+
+
+
+
+ </head> 
+
+ <body class="container">
+
+<h1 id="template">Cold Caller Template</h1>
+
+<h3 id="intro"> Fill in the form below, then press save and send.</h3>
+
+<form id="coldCaller" onsubmit="return false">
+
+		
+
+  		<hr id="headerHR"><br>
+
+       <div id="divtest1" class="div">
+
+         <h3 style="text-align:center">General Information</h3>
+
+        <label>Are you still at? (Address): Please type full address even if on file.</label><br>
+
+  		<input type="text" id="address" autofocus="autofocus" onsubmit="if(this == ''){$this.val('UNKNOWN');}"><br>
+
+  
+
+        
+
+        <label for="company">Who are you currently insured with?</label><br>
+
+<input type="text" id="company" ><br><br>
+
+
+
+<label for="price">Do you pay them monthly? What do you pay?</label><br>
+
+<input type="text" id="price" >
+
+  </div><hr>
+
+  
+
+  
+
+  <!--Start of driver info section -->
+
+  <div class="div">
+
+    <h3 style="text-align:center">Driver (1) Information</h3>
+
+    <label for="married">Are you maried?</label><br><span id="marriedMsg"style="display:none;color:red;font-weight:bold;padding-bottom:0;font-size:20px;">Driver is married. You MUST list their spouce below per Arkansas Law.</span>
+
+<select id = "married" onchange="showMarried('marriedMsg', this)">
+
+               <option value = "">--Select--</option>
+
+               <option value = "%0DDriver 1 is Married.">Married</option>
+
+               <option value = "%0DDriver 1 is Single.">Single</option>
+
+               <option value = "%0DDriver 1 is Divorced.">Divorced</option>
+
+               <option value = "%0DDriver 1's marital status is unknown.">Unknown</option>
+
+             </select>
+
+    <label for="occu">What is your/their occupation?</label><br>
+
+<input type="text" id="occu" >
+
+        <label for="dob">What is their Date of Birth / Birthday? (Do not include IF on file already)</label><br>
+
+    <input type="text" id="dob" value="On File" onfocus="this.value=''">
+
+    <label for="tkts">Any Tickets or Accidents within the last 3 years? (Explain if yes)</label><br>
+
+<input type="text" id="tkts">
+
+    <label for="gsd">Good Student Discount? (Age 25 and under only)</label><br>
+
+<input type="text" id="gsd" onfocus="this.value=''" value="N/A">
+
+    
+
+    <label ><b>Are there any additonal drivers?</b></label><br>
+
+    <select id="test" name="form_select" onchange="showDiv('drivers2', this)">
+
+   <option value="0">No</option>
+
+   <option value="1">Yes</option>
+
+</select>
+
+    <!-- THIS IS WHERE DRIVER 2 IS LOCATED -->
+
+<div id="drivers2" style="border:solid red 1px; display:none;">
+
+    <h3 style="text-align:center">Driver (2) Information</h3>
+
+  <label for="name2">Driver 2's Name:</label><br>
+
+<input type="text" id="name2" >
+
+  <label for="relation2">Relation to driver 1: </label><br>
+
+<input type="text" id="relation2" >
+
+    <label for="married2">Are you maried?</label><br>
+
+<select id = "married2">
+
+               <option value = "%0DDriver 2's marital status is unknown.">--Select--</option>
+
+               <option value = "%0DDriver 2 is Married.">Married</option>
+
+               <option value = "%0DDriver 2 is Single.">Single</option>
+
+               <option value = "%0DDriver 2 is Divorced.">Divorced</option>
+
+               <option value = "%0DDriver 2's marital status is unknown.">Unknown</option>
+
+             </select>
+
+    <label for="occu2">What is your/their occupation?</label><br>
+
+<input type="text" id="occu2" >
+
+  
+
+        <label for="dob2">What is their Date of Birth / Birthday?</label><br>
+
+    <input type="text" id="dob2" >
+
+  
+
+    <label for="tkts2">Any Tickets or Accidents within the last 3 years? (Explain if yes)</label><br>
+
+<input type="text" id="tkts2" >
+
+  
+
+    <label for="gsd2">Good Student Discount? (Age 25 and under only)</label><br>
+
+  <input type="text" id="gsd2">
+
+  
+
+    <label ><b>Are there any additonal drivers?</b></label><br>
+
+    <select id="test2" name="form_select" onchange="showDiv('drivers3', this)">
+
+   <option value="0">No</option>
+
+   <option value="1">Yes</option>
+
+</select>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    </div>
+
+  </div><br>
+
+    <!--END DRIVERS 2 SCREEN -->
+
+      
+
+  <!--Car Info -->
+
+  <div class="div">
+
+     <h3 style="text-align:center">Car Information</h3>
+
+     <label for="car1">Vehicle 1: (Year, Make, Model)</label><br>
+
+<input type="text" id="car1" ><br>
+
+    <label for="fc1">Full Coverage/Liability?</label><br>
+
+<input type="text" id="fc1"><br>
+
+    
+
+    <label for="car2">Vehicle 2: (Year, Make, Model)</label><br>
+
+<input type="text" id="car2" value="N/A" onfocus="this.value=''"><br>
+
+    <label for="fc2">Full Coverage/Liability?</label><br>
+
+<input type="text" id="fc2" value="N/A" onfocus="this.value=''"><br>
+
+    <label for="car3">Vehicle 3: (Year, Make, Model)</label><br>
+
+<input type="text" id="car3" value="N/A" onfocus="this.value=''"><br>
+
+    <label for="fc3">Full Coverage/Liability?</label><br>
+
+<input type="text" id="fc3" value="N/A" onfocus="this.value=''"><br>
+
+  </div>
+
+  
+
+  
+
+  <!-- Routing info and customer contact -->
+
+ <hr> <br>
+
+             <label>Sending to:</label>
+
+             <select id = "url">
+
+               <option value = "dp10">Justin Jones</option>
+
+               <option value = "f6c2">Matt McCarty</option>
+
+               <option value = "e9ra">Nura Austin</option>
+
+	       <option value = "wv69">Shane Johnson</option>
+
+             </select><br>
+
+  <div id="custInfo"><label for="customerName">Customer Name:</label><br>
+
+<input type="text" id="customerName" ><br>
+
+  <label for="phone">Customer Phone Number:</label><br>
+
+<input type="text" id="phone" ></div>
+
+    <label for="callback">Call back time:</label><br>
+
+<input type="text" id="callback" value="ASAP" onfocus="this.value=''">
+
+  <label for="remarks">Cold Caller Comments:</label><br>
+
+<input type="text" id="remarks">
+
+<h3 id="closing">Thank you for your time.</h3>
+
+
+
+  		<input id="submit" type="button" value="Save PDF & Create E-Mail" onclick="fillEmptyForms();document.title = document.getElementById('customerName').value +' -' + 'Cold Call' ;window.print();convert();" ><br /> 
+
+  </form>
+
+<p class="hi" id="converted_url">
+
+<div id="timeStap" style="display:none;">
+
+<h3 id="timeStampH2"></h3>
+
+</div>
+
+<footer><hr><center>
+
+
+
+  
+
+  
+
+  <script>
+
+    function showDiv(divId, element)
+
+{
+
+    document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
+
+}
+
+      function showMarried(divId, element)
+
+{
+
+    document.getElementById(divId).style.display = element.value == '%0DDriver 1 is Married.' ? 'block' : 'none';
+
+}  
+
+  </script>
+
+
+
+<script>
+
+var d = new Date();
+
+document.getElementById("timeStampH2").innerHTML = "Time/Date Stamp: "+ d;
+
+
+
+</script>
+
+<script>
+
+function wait(ms) {
+
+    var d = new Date();
+
+    var d2 = null;
+
+    do {
+
+        d2 = new Date();
+
+    }
+
+    while (d2 - d < ms);
+
+}
+
+
+
+
+
+function convert() {
+
+  var address = document.getElementById('address');
+
+if (address.value.length == 0)
+
+  address.value = "Unknown.";
+
+  //
+
+var company = document.getElementById('company');
+
+if(company.value.length == 0)
+
+    company.value = "Unknown";
+
+ //
+
+  var price = document.getElementById('price');
+
+if(price.value.length == 0)
+
+    price.value = "Unknown.";
+
+ //   
+
+  var occu = document.getElementById('occu');
+
+if (occu.value.length == 0)
+
+    occu.value = "Unknown.";
+
+ //   
+
+  var name2 = document.getElementById('name2');
+
+if (name2.value.length != 0)
+
+    name2.value = "%0D	__%0D%0D Driver 2 Info:%0DName: " + document.getElementById('name2').value;
+
+//
+
+var relation2 = document.getElementById('relation2');
+
+if (relation2.value.length != 0)
+
+   relation2.value = "%0DRelation to driver 1 is: " + document.getElementById('relation2').value;
+
+ //
+
+  var married2 = document.getElementById('married2');
+
+if (married2.value.length != 0)
+
+   married2.value = "%0DThe marital status of driver 2 is: " + document.getElementById('married2').value;
+
+  //
+
+    var occu2 = document.getElementById('occu2');
+
+if (occu2.value.length != 0)
+
+   occu2.value = "%0DThe occupation of driver 2 is: " + document.getElementById('occu2').value;
+
+  //
+
+      var dob2 = document.getElementById('dob2');
+
+if (dob2.value.length != 0)
+
+   dob2.value = "%0DThe DOB of driver 2 is: " + document.getElementById('dob2').value;
+
+  //
+
+        var gsd2 = document.getElementById('gsd2');
+
+if (gsd2.value.length != 0)
+
+   gsd2.value = "%0DThe DOB of driver 2 is: " + document.getElementById('gsd2').value;
+
+  //
+
+        var tkts2 = document.getElementById('tkts2');
+
+if (tkts2.value.length != 0)
+
+   tkts2.value = "%0DTickets or accidents for driver 2: " + document.getElementById('tkts2').value;
+
+//
+
+    var fc1 = document.getElementById('fc1');
+
+if (fc1.value.length != 0)
+
+   fc1.value = "%0DCoverage: " + document.getElementById('fc1').value;
+
+  //
+
+  var car2 = document.getElementById('car2');
+
+if (car2.value.length != 0)
+
+   car2.value = "%0D%0DVehicle 2 Info: " + document.getElementById('car2').value + "%0DCoverage: " + document.getElementById('fc2').value + "%0D";
+
+  //
+
+    var car3 = document.getElementById('car3');
+
+if (car3.value.length != 0)
+
+   car3.value = "%0DVehicle 3 Info: " + document.getElementById('car3').value + "%0DCoverage: " + document.getElementById('fc3').value + "%0D" ;
+
+  //
+
+    var remarks = document.getElementById('remarks');
+
+if (remarks.value.length != 0)
+
+   remarks.value = "%0DComments from cold caller: " + document.getElementById('remarks').value;
+
+
+
+  
+
+
+
+  
+
+  
+
+    var text = "mailto:" + document.getElementById("url").value + "&subject=New Quote:%20" + document.getElementById("customerName").value + "%20" + "&body=The following customer would like a quote:%0D%0D Name:%20" + document.getElementById("customerName").value + "%20" + "%0D" + "Phone:%20" + "tel:" + document.getElementById("phone").value + document.getElementById("remarks").value  + "%0D%0D" + "Address:%20" + document.getElementById("address").value + "%20."+"%0D%0D" + "They are currently insured with:%20" + document.getElementById("company").value + ". They pay:%20" + document.getElementById("price").value +"%0D	__%0D%0D Driver 1 Info:"+ document.getElementById("married").value +"%0D"+"Their occupation is: " +document.getElementById("occu").value + "%0DTickets or Accidents:%20" + document.getElementById("tkts").value +"%0DGood Student Discount:%20" + document.getElementById("gsd").value + document.getElementById("name2").value + document.getElementById("relation2").value + document.getElementById("married2").value + document.getElementById("occu2").value + document.getElementById("dob2").value + document.getElementById("tkts2").value + document.getElementById("gsd2").value +"%0D	__%0D%0D Vehicle 1:%20" + document.getElementById("car1").value + document.getElementById("fc1").value + document.getElementById("car2").value + document.getElementById("car3").value +"%0D	__%0D%0D Call back time: " + document.getElementById("callback").value + "%0D	__%0D%0DOpen as a PDF: " ;
+
+    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+
+    var text1 = text.replace(exp, "<a href='$1'>$1</a>");
+
+    var exp2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+
+    document.getElementById("converted_url").innerHTML = text1.replace(exp2, '$1<a target="_blank" href="http://$2">$2</a>');
+
+    window.location.href = (text);
+
+    wait(2000);
+
+    window.location.reload();
+
+}
+
+
+
+//function upperCaseF(a){
+
+//   setTimeout(function(){
+
+//        a.value = a.value.toUpperCase();
+
+//    }, 1);
+
+// }
+
+function fillEmptyForms() {
+
+  if (confirm("Are you finished with this document? \n\nTo continue editing, press CANCEL \nTo continue saving, press OK")) {
+
+  } 
+
+  else{
+
+  throw new Error("User stopped next function(s) from running by pressing cancel.");
+
+  }
+
+  
+
+}
+
+</script>
+
+
+
+</body>
+
+
+
+</html>

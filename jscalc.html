@@ -1,0 +1,170 @@
+<!doctype html>
+<!--Created in codepen and copied and pasted into Repl.it -->
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>JS Calculator</title>
+    <meta name="Description" content="Calculator">
+    <meta name="Author" content="Shane">
+
+    <link rel="stylesheet" href="assets/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.js"></script>
+<style>
+    
+
+
+
+#container {
+    position: relative;
+    max-width:80vw;
+}
+
+#head_box {
+    border-bottom: solid;
+    margin: 0 0 25px 0;
+    padding: 0;
+    width: 100%;
+    color: #14afc4;
+    border-color:  #148cc4;
+}
+
+h1 {
+    padding: 0px;
+    margin: 0;
+    font-size: 35px;
+}
+
+#calc_body {
+    border: solid;
+    width: 90%;
+    margin: 0 auto;
+}
+
+h4 {
+    position: absolute;
+    top: 37px;
+    background-color: white;
+}
+
+form {
+    width: 100%;
+}
+
+form * {
+    width: auto;
+    margin: 5px 0 5px 5px;
+}
+
+.formLabels {
+    display: inline-block;
+    text-align: right;
+    padding: 5px;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    padding-left: 5px;
+}
+</style>
+</head>
+
+<body>
+
+    <div id="container">
+
+        <div id="head_box">
+            <h1>Javascript Calculator</h1>
+        </div>
+        <div id="calc_body">
+            <H4>Calculator</H4>
+            <form id="calcForm" onsubmit="return false">
+                <label class="formFields formLabels" for="numOne">Operand 1:<input type="text" id="numOne" name="numOne" size="15" maxlength="15"       
+                   data-rule-required="true"  data-msg-required="Operand 1 is Required" 
+                   data-rule-number="true" data-msg-number="Operand 1 must be a Number"></label>
+                <br>
+                <label class="formLabels">Operator:</label>
+                <label for="rdAdd"><input type="radio" class="radioSelect" id="rdAdd" name="rdMath" value="+"data-rule-required="true" data-msg-required="Operator is Required">+</label>
+                <label for="rdSubtract"><input type="radio" class="radioSelect" id="rdSubtract" name="rdMath" value="-" />-</label>
+                <label for="rdMultiply"><input type="radio" class="radioSelect" id="rdMultiply" name="rdMath" value="*" />*</label>
+                <label for="rdDivide"><input type="radio" class="radioSelect" id="rdDivide" name="rdMath" value="/" />/</label>
+                <label for="rdMath" class="error"></label>
+                <br>
+                <label class="formFields formLabels" for="numTwo">Operand 2:<input type="text" id="numTwo" name="numTwo" maxlength="15"       
+                   data-rule-required="true"  data-msg-required="Operand 2 is Required" 
+                   data-rule-number="true" data-msg-number="Operand 2 must be a Number"></label>
+                <br>
+                <h3 class="formFields formLabels">Results: <span id="calcValue"></span></h3>
+                <br>
+                <input id="calcButton" type="submit" value="Calculate" name="calcButton" onclick="calcNum()">
+                <input type="button" value="Clear" name="Clear" onclick="clearform();" novalidate>
+
+            </form>
+            <script src="assets/script.js"></script>
+        </div>
+
+
+    </div>
+<script>
+    function calcNum() {
+
+    var operandOne;
+    var operandTwo;
+    var oneFp;
+    var twoFp;
+    var addResult;
+    var subtractResult;
+    var multiplyResult;
+    var divideResult;
+
+    operandOne = document.getElementById("numOne").value;
+    operandTwo = document.getElementById("numTwo").value;
+
+    oneFp = parseFloat(operandOne);
+    twoFp = parseFloat(operandTwo);
+
+    if ($("#calcForm").validate()) {
+        if (document.getElementById("rdAdd").checked) {
+            addResult = oneFp + twoFp;
+            document.getElementById("calcValue").innerHTML = addResult.toString();
+        }
+        else if (document.getElementById("rdSubtract").checked) {
+            subtractResult = oneFp - twoFp;
+            document.getElementById("calcValue").innerHTML = subtractResult.toString();
+        }
+        else if (document.getElementById("rdMultiply").checked) {
+            multiplyResult = oneFp * twoFp;
+            document.getElementById("calcValue").innerHTML = multiplyResult.toString();
+        }
+        else if (document.getElementById("rdDivide").checked) {
+            divideResult = oneFp / twoFp;
+            document.getElementById("calcValue").innerHTML = divideResult.toString();
+        }
+    }
+}
+
+function clearform() {
+
+    document.getElementById("numOne").value = '';
+    $(".radioSelect").prop("checked", false);
+    document.getElementById("numTwo").value = '';
+    document.getElementById("calcValue").innerHTML = "";
+
+}
+
+/* Form Validation */
+$( "#myform" ).validate({
+ 
+});
+    
+</script>
+
+</body>
+
+</html>
